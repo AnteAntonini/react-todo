@@ -9,6 +9,15 @@ function App() {
   const [status, setStatus] = useState("all");
   const [filteredTodos, setfilteredTodos] = useState([]);
 
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  useEffect(() => {
+    handleFilter();
+    saveLocalTodos();
+  },[todos, status]);
+
   const handleFilter = () => {
     switch(status) {
       case 'completed':
@@ -35,15 +44,6 @@ function App() {
       setTodos(todoLocal);
     }
   };
-
-  useEffect(() => {
-    getLocalTodos();
-  }, []);
-
-  useEffect(() => {
-    handleFilter();
-    saveLocalTodos();
-  },[todos, status]);
 
   return (
     <div className="App">
